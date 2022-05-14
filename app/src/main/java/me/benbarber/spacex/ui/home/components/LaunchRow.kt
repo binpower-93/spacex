@@ -2,11 +2,6 @@ package me.benbarber.spacex.ui.home.components
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.Close
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -15,75 +10,79 @@ import androidx.compose.ui.unit.dp
 import me.benbarber.spacex.ui.theme.SpacexTheme
 
 @Composable
-fun LaunchDetails(
+fun LaunchRow(
     modifier: Modifier = Modifier,
     nameOfMission: String,
     launchDate: String,
     wasSuccessful: Boolean,
+    badgeUrl: String,
+    badgeContentDescription: String?,
 ) {
-    Column(
-        modifier = modifier.padding(vertical = 8.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp),
+    Row(
+        modifier = modifier,
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
     ) {
-        Text(nameOfMission)
-        Text("Launch Date: $launchDate")
+        LaunchBadge(
+            modifier = Modifier.size(96.dp),
+            imageUrl = badgeUrl,
+            contentDescription = badgeContentDescription,
+        )
 
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Text(text = "Mission Success: ")
-            if(wasSuccessful) {
-                Icon(
-                    imageVector = Icons.Default.Check,
-                    contentDescription = "Successful",
-                )
-            } else {
-                Icon(
-                    imageVector = Icons.Default.Close,
-                    contentDescription = "Unsuccessful",
-                )
-            }
-        }
+        LaunchDetails(
+            modifier = Modifier.weight(1f),
+            nameOfMission = nameOfMission,
+            launchDate = launchDate,
+            wasSuccessful = wasSuccessful
+        )
     }
 }
 
+
+
 @Preview(
-    name = "Successful Launch Details",
+    name = "Successful Launch Row",
     uiMode = Configuration.UI_MODE_NIGHT_YES,
     showBackground = true,
 )
 @Preview(
-    name = "Successful Launch Details",
+    name = "Successful Launch Row",
     uiMode = Configuration.UI_MODE_NIGHT_NO,
     showBackground = true,)
 @Composable
-fun SuccessfulLaunchDetailsPreview() {
+fun SuccessfulLaunchRowPreview() {
     SpacexTheme {
-        LaunchDetails(
+        LaunchRow(
             modifier = Modifier.fillMaxWidth(),
             nameOfMission = "Falcon 9 Test Flight",
             launchDate = "04-06-2010",
             wasSuccessful = true,
+            badgeUrl = "https://images2.imgbox.com/ab/79/Wyc9K7fv_o.png",
+            badgeContentDescription = null,
         )
     }
 }
 
 @Preview(
-    name = "Unsuccessful Launch Details",
+    name = "Unsuccessful Launch Row",
     uiMode = Configuration.UI_MODE_NIGHT_YES,
     showBackground = true,
 )
 @Preview(
-    name = "Unsuccessful Launch Details",
+    name = "Unsuccessful Launch Row",
     uiMode = Configuration.UI_MODE_NIGHT_NO,
     showBackground = true,
 )
 @Composable
-fun UnsuccessfulLaunchDetailsPreview() {
+fun UnsuccessfulLaunchRowPreview() {
     SpacexTheme {
-        LaunchDetails(
+        LaunchRow(
             modifier = Modifier.fillMaxWidth(),
             nameOfMission = "Falcon 9 Test Flight",
             launchDate = "04-06-2010",
             wasSuccessful = false,
+            badgeUrl = "https://images2.imgbox.com/ab/79/Wyc9K7fv_o.png",
+            badgeContentDescription = null,
         )
     }
 }
