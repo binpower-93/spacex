@@ -1,10 +1,7 @@
 package me.benbarber.spacex.ui.home
 
 import android.content.res.Configuration
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
@@ -47,8 +44,9 @@ fun HomeScreenContent(
             }
             else -> {
                 LazyColumn(
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier.fillMaxSize().padding(horizontal = 16.dp),
                     contentPadding = paddingValues,
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
                     items(items = launches, key = { it.id }) { launch ->
                         LaunchRow(

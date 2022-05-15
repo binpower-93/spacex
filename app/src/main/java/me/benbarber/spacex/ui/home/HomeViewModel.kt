@@ -55,14 +55,14 @@ class HomeViewModel @Inject constructor(
         loading: Boolean,
         error: Boolean,
     ) {
-        _launches.value = launches.filter { it.upcoming != true }.map {
+        _launches.value = launches.sortedBy { it.dateUnix }.map {
             LaunchData(
                 id = it.id.orEmpty(),
                 nameOfMission = it.name.orEmpty(),
                 wasSuccessful = it.success == true,
                 launchDate = it.dateLocal.orEmpty().split('T').firstOrNull().orEmpty(),
                 badgeContentDescription = "Mission Badge",
-                badgeUrl = it.links?.patch?.large ?: it.links?.patch?.small.orEmpty()
+                badgeUrl = it.links?.patch?.small.orEmpty()
             )
         }
 
