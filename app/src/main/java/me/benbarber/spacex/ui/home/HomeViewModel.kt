@@ -44,7 +44,7 @@ class HomeViewModel @Inject constructor(
     private val _launches = MutableStateFlow<List<LaunchData>>(emptyList())
     override val launches: Flow<List<LaunchData>> = _launches
 
-    private val _loading = MutableStateFlow(false)
+    private val _loading = MutableStateFlow(true)
     override val loading: Flow<Boolean> = _loading
 
     private val _failed = MutableStateFlow(false)
